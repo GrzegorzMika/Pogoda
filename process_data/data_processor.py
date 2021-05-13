@@ -16,7 +16,7 @@ class DataProcessor:
             'weather': self.get_weather_info
         }
 
-    def call(self, response):
+    def __call__(self, response):
         for key, function in self.methods:
             self.insert_data(response, key, function)
 
