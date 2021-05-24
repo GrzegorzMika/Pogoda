@@ -1,8 +1,11 @@
 from datetime import datetime
 
+from google.cloud import firestore
+from sqlalchemy import create_engine
+
 
 class DataProcessor:
-    def __init__(self):
+    def __init__(self, credentials_path):
         self.methods = {
             'temperature': self.get_temperature_info,
             'pressure': self.get_pressure_info,
@@ -15,6 +18,11 @@ class DataProcessor:
             'location': self.get_location_info,
             'weather': self.get_weather_info
         }
+        self.bigquery = create_engine(
+            'bigquery://pogoda-312419/pogoda',
+            credentials_path=credentials_path
+        )
+        self.firestore = firestore.Client()
 
     def __call__(self, response):
         for key, function in self.methods:
