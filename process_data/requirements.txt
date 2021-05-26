@@ -2,3 +2,4 @@ sqlalchemy~=1.4.7
 google-cloud-bigquery-storage~=2.4.0
 google-cloud-firestore~=2.1.0
 pybigquery~=0.8.0
+tqdm~=4.59.0
