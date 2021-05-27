@@ -16,7 +16,8 @@ class DataProcessor:
             'snow': self.get_snow_info,
             'sun': self.get_sun_info,
             'location': self.get_location_info,
-            'weather': self.get_weather_info
+            'weather': self.get_weather_info,
+            'time': self.get_time_info
         }
         self.bigquery = create_engine(
             'bigquery://pogoda-312419/pogoda',
@@ -162,6 +163,17 @@ class DataProcessor:
             return [
                 response.get('id'),
                 datetime.utcfromtimestamp(response.get('dt') + response.get('timezone')).strftime("%Y-%m-%d %H:%M:%S")
+            ]
+        except AttributeError as e:
+            logging.error(e)
+            return [None, None]
+
+    @staticmethod
+    def get_time_info(response):
+        try:
+            return [
+                response.get('dt'),
+                response.get('timezone')
             ]
         except AttributeError as e:
             logging.error(e)

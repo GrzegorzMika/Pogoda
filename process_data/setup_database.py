@@ -89,4 +89,12 @@ if __name__ == '__main__':
         Column('icon', String(3))
     )
 
+    time = Table(
+        'time', meta,
+        Column('id', Integer, primary_key=True),
+        Column('timestamp', DateTime, primary_key=True),
+        Column('dt', Integer),
+        Column('timezone', Integer)
+    )
+
     meta.create_all(engine)
