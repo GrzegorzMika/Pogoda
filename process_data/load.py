@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -6,7 +7,7 @@ from tqdm import tqdm
 
 from data_processor import DataProcessor
 
-if __name__ == '__main':
+if __name__ == '__main__':
     credentials_path = sys.argv[1]
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credentials_path
 
@@ -15,6 +16,7 @@ if __name__ == '__main':
     with data_processor.bigquery.connect() as conn:
         res = conn.execute('SELECT max(dt) AS last_dt FROM time;')
     last_dt = res.fetchone()['last_dt']
+    logging.info(f'last_dt: {last_dt}')
 
     db = firestore.Client()
     collection = db.collection(u'raw_data')
