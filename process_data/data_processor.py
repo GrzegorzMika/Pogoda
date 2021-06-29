@@ -35,6 +35,8 @@ class DataProcessor:
     def insert_data(self, response, key, function):
         data = function(response)
         identifier = self.get_key(response)
+        if key == 'location':
+            _ = identifier.pop(-1)
         to_insert = identifier + data
         table = self.tables[key]
         ins = table.insert().values(to_insert)

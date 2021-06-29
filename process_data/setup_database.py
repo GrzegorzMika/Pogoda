@@ -73,7 +73,6 @@ if __name__ == '__main__':
     location = Table(
         'location', meta,
         Column('id', Integer, primary_key=True),
-        Column('timestamp', DateTime, primary_key=True),
         Column('name', String(128)),
         Column('country', String(2)),
         Column('longitude', Float),
